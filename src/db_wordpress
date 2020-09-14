@@ -1,4 +1,0 @@
-CREATE DATABASE wordpress;
-CREATE USER 'admin'@'localhost' IDENTIFIED BY '1234';
-GRANT ALL ON wordpress.* TO 'admin'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;
-FLUSH PRIVILEGES;

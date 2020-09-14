@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>FT_SERVER</title>
+</head>
+<body>
+	<h1>Ft_server</h1>
+	<p>General instructions</p>
+	<ul>
+		<li>You have to deliver all the files necessary for your server configuration in a srcs directory. </li>
+		<li>Your Dockerfile will have to be in the root of your repository. It will be used to build your container. You cannot use docker-compose.</li>
+		<li>All the files necessary for your wordpress will have to be in the srcs directory. </li>
+	</ul>
+	<p>Mandatory part</p>
+	<ul>
+		<li>You will have to install a web server with Nginx, inside a single Docker container. The container will have to run on Debian Buster. </li>
+		<li>Your server will have to allow multiple services to run at the same time. The services will be a Wordpress, which you will have to install yourself, Phpmyadmin and MySQL. You will have to make sure that your SQL database works with wordpress and with phpmyadmin.</li>
+		<li>When possible, your server should be able to use the SSL protocol.</li>
+		<li>You will have to ensure that your server redirects to the correct website, based on the url entered. You also need to ensure that your server runs with an automatic index, which can be disabled.</li>
+	</ul>
+	<div><a href="/wordpress/">Wordpress</a><a href="/wordpress/wp-admin/">Admin Wordpress</a></div>
+	<div><a href="/phpmyadmin/">PhpMyAdmin</a></div>
+	<div><a href="info.php">Info PHP</a></div>
+	<div><a target="_blank" href="/turnoff">OFF autoindex</a></div>
+</body>
+</html>

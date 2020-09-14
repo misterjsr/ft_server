@@ -1,52 +1,52 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jeserran <jeserran@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/08/24 20:14:14 by jeserran          #+#    #+#              #
+#    Updated: 2020/09/11 19:26:57 by jeserran         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-FROM debian:buster-slim
+FROM debian:buster
 
-LABEL maintainer: jeserran <jeserran@student.42.fr>
+MAINTAINER  jeserran <jeserran@student.42.fr>
 
+#	install and update system packages
 RUN apt-get update
-RUN apt-get install -y nginx mariadb-server php-fpm php-mysql wget
+RUN apt-get install -y wget
+
+#	install nginx
+RUN apt-get install -y nginx
 
 
-#configure nginx to load automacly wordpress page
-COPY src/nginx-host-conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/nginx-host-conf /etc/nginx/sites-enabled/
+#	install SSL
+RUN apt-get install openssl
 
-#SLL SETUP
-RUN mkdir ~/mkcert && \
-  cd ~/mkcert && \
-  wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64 && \
-  mv mkcert-v1.1.2-linux-amd64 mkcert && \
-  chmod +x mkcert && \
-./mkcert -install && \
-./mkcert localhost
-RUN rm var/www/html/index.nginx-debian.html
+#	intallMysql
+RUN apt-get install -y mariadb-server mariadb-client
 
-#config wordpress
-RUN cd var/www/html && wget http://wordpress.org/latest.tar.gz  && \
-tar -xzvf latest.tar.gz && rm latest.tar.gz 
-RUN cd var/www/html && cp -a wordpress/* . && rm -r wordpress
-RUN chown -R www-data:www-data /var/www/html/ && chmod -R 755 /var/www/html/  
-COPY src/wp-config.php /var/www/html/
+#	install PHP
+RUN apt-get install -y php7.3 php7.3-fpm php7.3-mysql php-common php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline
+RUN apt-get install -y php-mbstring php-zip php-gd
+RUN apt-get install -y php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
 
-#DATABASE SETUP
-COPY src/wordpress.sql ./root/
-RUN service mysql start && \
-echo "CREATE DATABASE wordpress;" | mysql -u root && \
-echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost';" | mysql -u root && \
-echo "update mysql.user set plugin = 'mysql_native_password' where user='root';" | mysql -u root  && \
-mysql wordpress -u root --password=  < ./root/wordpress.sql
+#	copy configuration files and the index
+RUN mkdir /temp
+COPY srcs/config.inc.php ./temp
+COPY srcs/config.sh ./temp
+COPY srcs/index.html ./var/www/localhost/
+COPY srcs/info.php ./var/www/localhost/
+COPY srcs/default ./temp
+COPY /srcs/wordpress.sql ./temp
+COPY srcs/wp-config.php ./temp
+RUN mkdir /turnoff
 
-#PHPMYADMIN INSTALL
-COPY src/config.inc.php ./root/
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz && \
-mkdir /var/www/html/phpmyadmin && \
-tar xzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/html/phpmyadmin && \
-cp /root/config.inc.php /var/www/html/phpmyadmin/ 
+#	open the ports
+EXPOSE 80
+EXPOSE 443
 
-
-EXPOSE 80 443
-
-CMD service nginx start && \
-  service mysql start && \
-  service php7.3-fpm start && \
-  sleep infinity
+#	start the configuration
+CMD bash /temp/config.sh
