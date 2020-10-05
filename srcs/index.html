@@ -5,9 +5,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FT_SERVER</title>
+	<style>
+		body{
+			padding: 20px;
+		}
+		.button{
+			background-color: grey;
+			border-radius: 10px;
+			color:white;
+			padding: 10px;
+			margin: 20px;
+		}
+		.button.button:hover{
+			background-color: red;
+		}
+		h1{
+			justify-content: center;
+		}
+	</style>
 </head>
 <body>
-	<h1>Ft_server</h1>
+	<h1>42 Madrid</h1>
+	<h2>Ft_server</h2>
 	<p>General instructions</p>
 	<ul>
 		<li>You have to deliver all the files necessary for your server configuration in a srcs directory. </li>
@@ -21,9 +40,13 @@
 		<li>When possible, your server should be able to use the SSL protocol.</li>
 		<li>You will have to ensure that your server redirects to the correct website, based on the url entered. You also need to ensure that your server runs with an automatic index, which can be disabled.</li>
 	</ul>
-	<div><a href="/wordpress/">Wordpress</a><a href="/wordpress/wp-admin/">Admin Wordpress</a></div>
-	<div><a href="/phpmyadmin/">PhpMyAdmin</a></div>
-	<div><a href="info.php">Info PHP</a></div>
-	<div><a target="_blank" href="/turnoff">OFF autoindex</a></div>
+	<div>
+		<h3>OPTIONS</h3>	
+		<p>Ver página de Wordpress--><a href="/wordpress/" class="button">Wordpress</a></p><br>
+		<p>Ver página de configuración de Wordpress--><a href="/wordpress/wp-admin/" class="button">Admin Wordpress</a></p><br>
+		<p>Ver base de datos--><a href="/phpmyadmin/" class="button">PhpMyAdmin</a></p><br>
+		<p>Ver info de la base de datos--><a href="info.php" class="button">Info PHP</a></p><br>
+		<p>Autoindex--><a target="_blank" href="/turnoff" class="button">OFF autoindex</a></p>
+	</div>
 </body>
 </html>

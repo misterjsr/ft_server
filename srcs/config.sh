@@ -1,7 +1,7 @@
 #	config NGINX
 mkdir var/www/localhost
 rm /etc/nginx/sites-enabled/default
-mv ./default /etc/nginx/sites-available/
+mv ./temp/default /etc/nginx/sites-available/
 
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
@@ -20,13 +20,12 @@ rm phpMyAdmin-5.0.1-english.tar.gz
 chmod 660 /var/www/localhost/phpmyadmin/config.inc.php
 chown -R www-data:www-data /var/www/localhost/phpmyadmin
 
-
-
 #	load WordPress
 wget https://wordpress.org/latest.tar.gz
 tar xvf latest.tar.gz
-mkdir var/www/localhost/wordpress
-cp -a wordpress/. /var/www/localhost/wordpress
+rm latest.tar.gz
+mv wordpress /var/www/localhost/
+chown -R www-data.www-data -R /var/www/localhost/wordpress/*
 mv ./temp/wp-config.php /var/www/localhost/wordpress
 
 #	start the services
@@ -39,6 +38,7 @@ echo "CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_
 echo "GRANT ALL ON wordpress.* TO 'chuchi'@'localhost' IDENTIFIED BY '123';" | mysql -u root
 echo "GRANT ALL ON *.* TO 'chuchi'@'localhost' IDENTIFIED BY '123'" | mysql -u root
 echo "FLUSH PRIVILEGES;" | mysql -u root
+mysql wordpress -u root --password=  < /temp/wordpress.sql
 
 echo "Wellcome to FT_SERVER"
 echo "by jeserran"
