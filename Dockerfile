@@ -40,8 +40,9 @@ COPY srcs/config.sh ./temp
 COPY srcs/index.html ./var/www/localhost/
 COPY srcs/info.php ./var/www/localhost/
 COPY srcs/default ./temp
-COPY /srcs/wordpress.sql ./temp
+COPY srcs/wordpress.sql ./temp
 COPY srcs/wp-config.php ./temp
+COPY srcs/autoindex.sh ./
 RUN mkdir /turnoff
 
 #	open the ports
