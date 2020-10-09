@@ -12,7 +12,7 @@
 
 FROM debian:buster
 
-MAINTAINER  jeserran <jeserran@student.42.fr>
+LABEL MAINTAINER jeserran <jeserran@student.42.fr>
 
 #	install and update system packages
 RUN apt-get update
