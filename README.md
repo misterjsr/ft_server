@@ -18,4 +18,6 @@ Para que el ft_server de este repositorio funcione, simplemente hay que montar e
 
   ```docker run -it -p 80:80 -p 443:443 ft_server```
 
-Donde ft_server es el nombre de la imagen, podemos poner el nombre deseado.
+Donde ft_server es el nombre de la imagen, podemos poner el nombre deseado. Una vez ejecutado, encontrará un pequeño script que activa o desactiva el autoindex (autoindex.sh)
+
+Este ha sido mi proyecto para la escuela de programación 42 Madrid
