@@ -20,4 +20,4 @@ Para que el ft_server de este repositorio funcione, simplemente hay que montar e
 
 Donde ft_server es el nombre de la imagen, podemos poner el nombre deseado. Una vez ejecutado, encontrará un pequeño script que activa o desactiva el autoindex (autoindex.sh)
 
-Este ha sido mi proyecto para la escuela de programación 42 Madrid como jeserran, puedes utilizarlo como guía para realizar tu proyecto pero nunca copiarlo para utilizarlo como propio.
+#### Este ha sido mi proyecto para la escuela de programación 42 Madrid como jeserran, puedes utilizarlo como guía para realizar tu proyecto pero nunca copiarlo para utilizarlo como propio.
